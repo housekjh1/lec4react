@@ -1,8 +1,12 @@
+import style from './MyCom.module.css';
+
 const MyComN = (probs) => {
 
     return (
-        <div>숫자 : {probs.num}</div>
-
+        <>
+            <div className={style.numDiv}>{probs.n}</div>
+            <div className={style.numDiv}>{probs.n1}</div>
+        </>
     );
 }
 

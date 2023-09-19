@@ -1,0 +1,14 @@
+.OLD {
+    color: red;
+}
+
+.NEW {
+    color: blue;
+}
+
+.design > span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
