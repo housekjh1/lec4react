@@ -5,7 +5,9 @@
 ## 환경
 
 - cmd
-> npx create-react-app <프로젝트명(소문자)>
+> npx create-react-app <프로젝트명(소문자)><br/>
+- VSCode extension : Live Server
+- VSCode extension : ES7 React/Redux/GraphQL/React-Native snippets
 
 ## 실행
 

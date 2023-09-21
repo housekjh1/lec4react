@@ -1,47 +1,40 @@
-import style from './Lotto.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import LottoNums from './LottoNums';
 
 const Lotto = () => {
 
-    let numArr = [];
-    // let lottoTag = [];
-    const [lottoTag, setLottoTag] = useState([]);// 변수명, 바꿀값, useState(초기값)
-
-    const getNum = () => {
-        numArr = [];
-        while (numArr.length < 7) {
+    const [nums, setNums] = useState();
+    //버튼 클릭
+    const handleClick = () => {
+        let temp = [];
+        // while (true) {
+        //     if (temp.length === 7) break;
+        // }
+        while (temp.length < 7) {
             let n = Math.floor(Math.random() * 45) + 1;
-            if (numArr.indexOf(n) < 0) {// 중복값 제거, 없을 경우 음수, 있을 경우 인덱스값 리턴
-                numArr.push(n);
-            }
+            if (temp.indexOf(n) < 0) temp.push(n);
         }
-
-        // console.log(numArr);
-        // lottoTag = numArr.map((item) => {// map(), 배열을 하나씩 순회
-        //     <div className={style.lottonum}>1</div>
-        // });
-        setLottoTag(numArr.map((item) =>
-            <div className={style.lottonum}>{item}</div>
-        ));
-        // console.log(lottoTag);
+        setNums(temp);
     }
 
+    useEffect(() => {
+        console.log("nums=", nums);
+
+    }, [nums]);
+    // nums의 초기값이 null인 경우 LottoNums로 값이 넘어가면 ns가 map을 돌 때 에러가 발생
     return (// 하나의 태그만 리턴이 가능 단, 자식 노드들은 제한없이 달고갈 수 있음, <></>프래그먼트 태그도 사용가능
         <main className="container">
             <article>
                 <header>
                     <h1>로또생성기</h1>
                 </header>
-                <div className={style.lottobox}>
-                    {lottoTag}
-                </div>
+                    {nums ? <LottoNums ns={nums}/> : '숫자가 없습니다.'}
                 <footer>
-                    <button onClick={() => getNum()}>생성하기</button>
+                    <button onClick={handleClick}>생성하기</button>
                 </footer>
             </article>
         </main>
     );
-
 }
 
 export default Lotto;

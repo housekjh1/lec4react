@@ -3,7 +3,9 @@ import './App.css';
 // import Lotto from './02/Lotto';
 // import MyCom from './03/MyCom';
 // import MyDiv from './03/MyDiv';
-import BoxOffice from './04/BoxOffice';
+// import BoxOffice from './04/BoxOffice';
+// import Frcst from './05/Frcst';
+import Taccident from './06/Taccident';
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
     // <Lotto />
     // <MyCom />
     // <MyDiv />
-    <BoxOffice />
+    // <BoxOffice />
+    // <Frcst />
+    <Taccident />
   );
 }
 

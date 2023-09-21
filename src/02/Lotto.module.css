@@ -4,13 +4,46 @@
     align-items: center;
   }
   
-  .lottonum {
+  .lottonum0, .lottonum1, .lottonum2, .lottonum3, .lottonum4 {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     height: 50px;
     margin: 5px;
-    border: 1px solid gray;
+    /* border: 1px solid; */
     border-radius: 50%;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 10px 1px gainsboro;
+  }
+
+  .lottonum0 {
+    background-color: #F9E802;
+  }
+
+  .lottonum1 {
+    background-color: lightskyblue;
+  }
+
+  .lottonum2 {
+    background-color: hotpink;
+  }
+
+  .lottonum3 {
+    background-color: gainsboro;
+  }
+
+  .lottonum4 {
+    background-color: lightgreen;
+  }
+
+  .plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 30px;
   }
