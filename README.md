@@ -6,6 +6,7 @@
 
 - cmd
 > npx create-react-app <프로젝트명(소문자)><br/>
+> 설치 에러 시 npm uninstall -g create-react-app<br/>
 - VSCode extension : Live Server
 - VSCode extension : ES7 React/Redux/GraphQL/React-Native snippets
 
