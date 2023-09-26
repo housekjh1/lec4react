@@ -1,45 +1,70 @@
 import Hh1 from '../comm/Hh1';
-import data from './dataTaccident.json';
+import TaccidentNav from './TaccidentNav';
+import dataTaccident from './dataTaccident.json';
+import { useState, useEffect } from 'react';
+import style from './Taccident.module.css';
 
 const Taccident = () => {
 
-    const tdata = data.data;
+    // 오브젝트 값 가져오기
+    // const tdata = dataTaccident["data"];
+    const tdata = dataTaccident.data;
 
-    let c1 = tdata.map(item => item.사고유형_대분류);
-    c1 = [...new Set(c1)];// new Set(변수명) Set(키값X, 밸류만 존재)형으로 생성, [...변수명] -> Set 배열화
-    let c2 = tdata.map(item => item.사고유형_중분류);
-    c2 = new Set(c2);
-    c2 = [...c2];
-    console.log(c2);
+    // 배열 순회
+    let c1 = tdata.map(item => item['사고유형_대분류']);
+    c1 = [...new Set(c1)];
 
-    let c1Tag = c1.map((item, idx) =>
-        <li key={`li${idx}`}><button>{item}</button></li>
-    );
-    
-    let c2Tag = c2.map((item, idx) => 
-        <li key={`li2${idx}`}><button>{item}</button></li>
-    );
+    // 대분류 선택
+    const [sel1, setSel1] = useState();
+
+    // 중분류
+    const [c2, setC2] = useState();
+
+    // 중분류 선택
+    const [sel2, setSel2] = useState();
+
+    useEffect(() => {
+        if (!sel1) return;
+        let temp = tdata.filter((item) => item.사고유형_대분류 === sel1);
+        temp = temp.map((item) => item.사고유형_중분류);
+
+        // let temp = 
+        // tdata
+        // .filter((item) => item.사고유형_대분류 === sel1)
+        // .map((item) => item.사고유형_중분류);
+
+        setC2(temp);
+        // console.log(temp);
+    }, [sel1]);
+
+    // 중분류 선택잡기
+    useEffect(() => {
+        if (!sel2) return;
+        let temp = tdata.filter((item) => item.사고유형_대분류 === sel1 && item.사고유형_중분류 === sel2);
+        temp = temp[0];// 결과는 오브젝트
+
+        // 오브젝트 순회
+        let k = Object.keys(temp).filter((item) => 
+            (item !== '사고유형_대분류' && item !== '사고유형_중분류')
+        );// 키 값만 빼기 -> 배열 리턴
+        
+        temp = k.map((item, idx) => 
+            <div key={`d${idx}`}>{item} : <span className={style.cl}>{temp[item]}</span></div>
+        );// item : 키값, temp오브젝트[item] : 해당 키값의 밸류 리턴
+
+        setDivTag(temp);
+
+    }, [sel2]);
+
+    const [divTag, setDivTag] = useState();
 
     return (
-        <main className="container">
+        <main className='container'>
             <article>
-                <Hh1 title='도로교통공단_사고유형별 교통사고 통계' />
-                <nav>
-                    <ul>
-                        <li><strong>대분류</strong></li>
-                    </ul>
-                    <ul>
-                        {c1Tag}
-                    </ul>
-                </nav>
-                <nav>
-                    <ul>
-                        <li><strong>중분류</strong></li>
-                    </ul>
-                    <ul>
-                        {c2Tag}
-                    </ul>
-                </nav>
+                <Hh1 title='유형별 교통사고' />
+                <TaccidentNav title='교통사고 대분류' c={c1} setSel={setSel1} />
+                {c2 && <TaccidentNav title='교통사고 중분류' c={c2} setSel={setSel2} />}
+                {divTag && <div className='grid'>{divTag}</div>}
             </article>
         </main>
     );
