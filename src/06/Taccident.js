@@ -34,6 +34,8 @@ const Taccident = () => {
         // .map((item) => item.사고유형_중분류);
 
         setC2(temp);
+        setSel2();// 초기화
+        setDivTag();// 초기화
         // console.log(temp);
     }, [sel1]);
 
