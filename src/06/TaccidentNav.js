@@ -1,6 +1,6 @@
 import style from './Taccident.module.css';
 
-const TaccidentNav = ({ title, c, setSel }) => {
+const TaccidentNav = ({ title, c, sel, setSel }) => {
 
     const handleClick = (item) => {
         setSel(item);
@@ -8,7 +8,7 @@ const TaccidentNav = ({ title, c, setSel }) => {
 
     let liTag = c.map((item, idx) => {
         return (
-            <li key={`li${idx}`}><button onClick={() => handleClick(item)} className={style.bt}>{item}</button></li>
+            <li key={`li${idx}`}><button className={item === sel ? style.bt1 : style.bt2} onClick={() => handleClick(item)} >{item}</button></li>
         );
     });
 

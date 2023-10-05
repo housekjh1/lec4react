@@ -1,81 +1,81 @@
-import { useState, useEffect } from "react";
+import Hh1 from '../comm/Hh1';
 import style from './BoxOffice.module.css';
+import { useRef, useState, useEffect } from 'react';
 
 const BoxOffice = () => {
+    // 날짜선택
+    const dt = useRef();
 
-    const [boxlist, setBoxList] = useState();
-    const [listTag, setListTag] = useState();
-    const [detailTag, setDetailTag] = useState();
+    // 선택된 날짜
+    const [cdt, setCdt] = useState();
 
-    const handleClick = (item) => {
-        console.log(item);
-        if (item.rankOldAndNew === "NEW") {
-            setDetailTag(
-                <div className={style.design}>
-                    <span>[{item.movieCd}]</span>
-                    <span>개봉일 : {item.openDt}</span>
-                    <span className={style.NEW}>{item.rankOldAndNew}</span>
-                </div>
-            );
-        } else {
-            setDetailTag(
-                <div className={style.design}>
-                    <span>[{item.movieCd}]</span>
-                    <span>개봉일 : {item.openDt}</span>
-                    <span className={style.OLD}>{item.rankOldAndNew}</span>
-                </div>
-            );
-        }
-    }
+    // 컴포넌트 생성 시 한 번 실행
+    useEffect(() => {
+        dt.current.focus();
 
-    useEffect(() => {// 컴포넌트 생성 시 한 번 실행
-        let url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20230918`;
-        fetch(url)
-            .then(resp => resp.json())
-            .then(data => setBoxList(data.boxOfficeResult.dailyBoxOfficeList))
-            .catch(err => console.log(err));
+        // let date = new Date();
+        // let yyyy = date.getFullYear().toString();
+        // let mm = (date.getMonth() + 1);
+        // mm = parseInt(mm) < 10 ? '0' + (mm.toString()) : mm.toString();
+        // let dd = (date.getDate() - 1);
+        // dd = parseInt(dd) < 10 ? '0' + (dd.toString()) : dd.toString();
+        // setCdt(yyyy + mm + dd);
+
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        let y = `${yesterday.getFullYear()}`;
+        let m = yesterday.getMonth() + 1 < 10 ? `0${yesterday.getMonth() + 1}` : `${yesterday.getMonth() + 1}`;
+        let d = yesterday.getDate() < 10 ? `0${yesterday.getDate()}` : `${yesterday.getDate()}`;
+
+        // 어제 날짜로 기본값 설정
+        dt.current.value = `${y}-${m}-${d}`;// 연월일 형식으로 입력해야 들어감
+        setCdt(y + m + d);
     }, []);
 
-    // State 변수가 변경될 때마다 실행
     useEffect(() => {
-        if (boxlist) {
-            setListTag(boxlist.map((item, idx) =>
-                <tr key={'mv' + idx} onClick={() => handleClick(item)}>
-                    <td>{item.rank}</td>
-                    <td>{item.movieNm}</td>
-                    <td>{parseInt(item.salesAmt).toLocaleString('ko-KR')}</td>
-                    <td>{
-                        parseInt(item.rankInten) === 0
-                            ? "-"
-                            : item.rankInten > 0
-                                ? "▲" + Math.abs(item.rankInten)
-                                : "▼" + Math.abs(item.rankInten)
-                    }</td>
-                </tr>
-            ));
-        }
-    }, [boxlist]);
+        console.log(cdt);
+
+        let url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${cdt}`;
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => {
+                let tmp = data.boxOfficeResult.dailyBoxOfficeList;
+                console.log(tmp);
+            })
+            .catch(err => console.log(err));
+    }, [cdt]);
+
+    const [boxList, setBoxList] = useState();
+    const [detailTag, setDetailTag] = useState();
+
+    // 날짜가 변경되었을 때
+    const handleChange = () => {
+        let tmp = dt.current.value.replaceAll('-', '');
+        setCdt(tmp);
+    }
 
     return (
-        <main className="container">
+        <main className='container'>
+            <section className={style.sec}>
+                <Hh1 title='박스오피스' />
+            </section>
             <article>
-                <header><h1>일일 박스오피스</h1></header>
-                <table role="grid">
+                <header>
+                    <div className={style.dtsel}>날짜선택 : {cdt}</div>
+                    <form>
+                        <input ref={dt} type='date' id='dt' name='dt' onChange={handleChange} />
+                    </form>
+                </header>
+                <table role='grid'>
                     <thead>
                         <tr>
-                            <th scope="col">순위</th>
-                            <th scope="col">영화명</th>
-                            <th scope="col">매출액</th>
-                            <th scope="col">증감</th>
+                            <th scope='col'>순위</th>
+                            <th scope='col'>제목</th>
+                            <th scope='col'>매출액</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {listTag}
-                    </tbody>
-                </table>
-                <footer>
                     {detailTag}
-                </footer>
+                </table>
             </article>
         </main>
     );

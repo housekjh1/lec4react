@@ -64,8 +64,8 @@ const Taccident = () => {
         <main className='container'>
             <article>
                 <Hh1 title='유형별 교통사고' />
-                <TaccidentNav title='교통사고 대분류' c={c1} setSel={setSel1} />
-                {c2 && <TaccidentNav title='교통사고 중분류' c={c2} setSel={setSel2} />}
+                <TaccidentNav title='교통사고 대분류' c={c1} sel={sel1} setSel={setSel1} />
+                {c2 && <TaccidentNav title='교통사고 중분류' c={c2} sel={sel2} setSel={setSel2} />}
                 {divTag && <div className='grid'>{divTag}</div>}
             </article>
         </main>

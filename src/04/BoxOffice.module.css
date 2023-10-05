@@ -12,3 +12,13 @@
     align-items: center;
     width: 30%;
 }
+
+.dtsel {
+    font-size: larger;
+    font-weight: bold;
+    color: blue;
+}
+
+.sec {
+    margin-top: 60px;
+}
