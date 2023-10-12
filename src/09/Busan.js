@@ -15,8 +15,6 @@ const Busan = () => {
         [item.콘텐츠ID, item.콘텐츠명.slice(0, item.콘텐츠명.lastIndexOf('('))]
     );
 
-    console.log(code);
-
     const handleSearch = (e) => {
         e.preventDefault();
     }
@@ -26,6 +24,7 @@ const Busan = () => {
     }
 
     useEffect(() => {
+        console.log(code);
         sel.current.focus();
 
         let tmp = code.map(item => {
