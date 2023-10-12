@@ -1,12 +1,14 @@
+import { useState, useEffect, useRef } from "react";
 import { FcCompactCamera } from "react-icons/fc";
 import ButtonBlue from "../comm/ButtonBlue";
-import { useState, useEffect, useRef } from "react";
-import GalleryItem from './GalleryItem';
+// import GalleryItem from './GalleryItem';
+import GalleryCard from "../comm/GalleryCard";
 
 const Gallery = () => {
   const txt1 = useRef();// 인풋 제어
   const [kw, setKw] = useState();
   const [data1, setData1] = useState();
+  const [tags, setTags] = useState();
 
   const handleOk = (e) => {
     e.preventDefault();
@@ -16,11 +18,27 @@ const Gallery = () => {
 
   const handleCancel = (e) => {
     e.preventDefault();
+    txt1.current.value = "";
+    setData1();
+    txt1.current.focus();
   }
 
   useEffect(() => {// 컴포넌트 생성 후 한 번 실행
     txt1.current.focus();
   }, [])
+
+  useEffect(() => {
+    getData(kw);
+  }, [kw]);
+
+  useEffect(() => {
+    if (data1 === undefined) return;
+    setTags(
+      data1.map((item) =>
+        <GalleryCard refv={txt1} key={item.galContentId} probs={item} set={setKw}/>
+      )
+    );
+  }, [data1]);
 
   const getData = (kw) => {
     const apikey = `plzVJFqsOqtUcJRz1vXIKLJNwG41wF%2B3bIFSiNVK2UvAmPWaISX%2B%2BXlzG8ITZ8mzokDaMWoYxL248NM%2BolJUIg%3D%3D`;
@@ -44,13 +62,12 @@ const Gallery = () => {
       .catch(err => console.log(err));
   }
 
-  useEffect(() => {
-    getData(kw);
-  }, [kw]);
-
-  useEffect(() => {
-
-  }, [data1]);
+  // let tags;
+  // if (data1 != null) {
+  //   tags = data1.map((item) => {
+  //     return <GalleryCard key={item.galContentId} probs={item} />
+  //   });
+  // }
 
   return (
     <main className='container'>
@@ -76,7 +93,10 @@ const Gallery = () => {
         </form>
       </article>
       <section>
-        {data1 && <GalleryItem data1={data1} />}
+        {/* {data1 && <GalleryItem data1={data1} />} */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-38">
+          {data1 && tags}
+        </div>
       </section>
     </main>
   );

@@ -19,3 +19,8 @@
 ## 실행
 
 > npm start
+
+### React 버전 확인
+
+> Open the package.json file in a text editor.<br/>
+> Look for the "react-native" key within the "dependencies" section.
