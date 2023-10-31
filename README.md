@@ -24,3 +24,7 @@
 
 > Open the package.json file in a text editor.<br/>
 > Look for the "react-native" key within the "dependencies" section.
+
+### snippets
+
+> ES7 React/Redux/GraphQL/React-Native snippets(rodrigovallades)
