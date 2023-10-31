@@ -8,7 +8,8 @@
 > npx create-react-app <프로젝트명(소문자)><br/>
 > 설치 에러 시 npm uninstall -g create-react-app<br/>
 - VSCode extension : Live Server(Ritwick Dey)
-- VSCode extension : ES7 React/Redux/GraphQL/React-Native snippets(rodrigovallades)<br/>
+- VSCode extension : ES7 React/Redux/GraphQL/React-Native snippets(rodrigovallades)
+- VSCode extension : Tailwind CSS IntelliSense(Tailwind Labs)<br/>
 > tailwindcss<br/>
 > https://tailwindcss.com/docs/installation<br/>
 > React Icons <br/>
