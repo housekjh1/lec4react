@@ -10,9 +10,9 @@ const FcstMain = () => {
     const [y, setY] = useState();
     const [area, setArea] = useState();
 
-    const ops = getxy.map(item =>
-        <option key={item.행정구역코드} value={item["행정구역코드"]}>{item["1단계"]}</option>
-    );
+    const ops = getxy.map(item => {
+        return <option key={item.행정구역코드} value={item["행정구역코드"]}>{item["1단계"]}</option>
+    });
 
     useEffect(() => {
         dtRef.current.focus();

@@ -1,7 +1,7 @@
 
 const TailH1 = ({title}) => {
   return (
-    <h1 className="text-2xl font-bold text-gray-700 mx-5 my-10 text-center">
+    <h1 className="text-base font-bold text-gray-500">
       {title}
     </h1>
   )
