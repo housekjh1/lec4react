@@ -29,3 +29,7 @@
 ### react-router-dom
 
 > npm install react-router-dom
+
+### query-string
+
+> npm install query-string
