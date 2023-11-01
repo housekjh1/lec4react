@@ -19,8 +19,8 @@
 
 ## 실행
 
-> npm start
-
+> npm start<br/>
+> 안될 시 npm update 후 npm start
 ### React 버전 확인
 
 > Open the package.json file in a text editor.<br/>
