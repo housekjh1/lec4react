@@ -63,18 +63,26 @@ const FcstMain = () => {
                     <div className='col-span-2'>
                         <TailH1 title="기상청 예보 정보입력" />
                     </div>
-                    <input ref={inDt} type='date' id='dt' name='dt' onChange={handleDtChange} />
-                    <TailSelect id={'sel'} opItem={opItem} handleChange={handleSelChange} />
-                    {
-                        x ?
-                            <Link to={`/fetch/${dt}/${area}/${x}/${y}/1`}><ButtonBlue caption='초단기예보' /></Link>
-                            : <ButtonBlue caption='초단기예보' handleClick={handleBtClick} />
-                    }
-                    {
-                        x ? 
-                            <Link to={`/fetch/${dt}/${area}/${x}/${y}/2`}><ButtonBlue caption='단기예보' /></Link>
-                            : <ButtonBlue caption='단기예보' handleClick={handleBtClick} />
-                    }
+                    <div>
+                        <input ref={inDt} type='date' id='dt' name='dt' onChange={handleDtChange} />
+                    </div>
+                    <div>
+                        <TailSelect id={'sel'} opItem={opItem} handleChange={handleSelChange} />
+                    </div>
+                    <div>
+                        {
+                            x ?
+                                <Link to={`/fetch/${dt}/${area}/${x}/${y}/1`}><ButtonBlue caption='초단기예보' /></Link>
+                                : <ButtonBlue caption='초단기예보' handleClick={handleBtClick} />
+                        }
+                    </div>
+                    <div>
+                        {
+                            x ?
+                                <Link to={`/fetch/${dt}/${area}/${x}/${y}/2`}><ButtonBlue caption='단기예보' /></Link>
+                                : <ButtonBlue caption='단기예보' handleClick={handleBtClick} />
+                        }
+                    </div>
                 </div>
             </form>
         </section>
