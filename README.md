@@ -34,6 +34,10 @@
 
 > npm install query-string
 
+### Recoil
+
+> npm install recoil
+
 ## 환경변수
 [(출처)](https://velog.io/@rmaomina/react-env)
 ### .env(프로젝트 루트 경로에 생성)
