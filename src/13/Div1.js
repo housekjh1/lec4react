@@ -1,9 +1,14 @@
-import Div2 from './Div2'
+import Div2 from '../14/Div2'
 
-const Div1 = ({ n, n2, set1, set2 }) => {
+const Div1 = ({ n, setN }) => {
     return (
-        <div className='bg-green-800 p-10 rounded-lg'>
-            <Div2 n={n} n2={n2} set1={set1} set2={set2} />
+        <div>
+            <div className='bg-green-800 px-10 pb-10 rounded-lg'>
+                <div className='text-white py-5'>
+                    Div1
+                </div>
+                <Div2 n={n} setN={setN} />
+            </div>
         </div>
     )
 }
